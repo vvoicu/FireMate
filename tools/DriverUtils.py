@@ -2,6 +2,8 @@ from pyvirtualdisplay import Display
 from selenium import webdriver
 import os
 
+
+
 class DriverUtils(object):
     def start_linux_headless(self):
         # headless config
@@ -10,13 +12,16 @@ class DriverUtils(object):
 
     def start_driver(self):
         # self.start_linux_headless()
-        return webdriver.Chrome("drivers/chromedriver")
+        driverPath = "/home/vvoicu/Documents/repositories/FireMate/drivers/chromedriver"
+        print "Chrome Driver path: " .format(driverPath)
+        return webdriver.Chrome(driverPath)
+        # return webdriver.Firefox()
 
     def read_run_config(self):
         pathRoot = os.getcwd().replace("tools","")
         with open(pathRoot + "configs/RunOption.txt", "r") as f:
             return f.readline()
-        return "local2"
+        return "dev"
 
     def read_config_file(self):
         pass
