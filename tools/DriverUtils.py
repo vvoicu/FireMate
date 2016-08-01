@@ -13,8 +13,8 @@ class DriverUtils(object):
 
     def start_driver(self):
         # self.start_linux_headless()
-        driverPath = "/home/vvoicu/Documents/repositories/FireMate/drivers/chromedriver"
-        # driverPath = "C:\Users\calinmarchis\Repository\hellfire-auto\FireMate\drivers\chromedriver.exe"
+        # driverPath = "/home/vvoicu/Documents/repositories/FireMate/drivers/chromedriver"
+        driverPath = "C:\Users\calinmarchis\Repository\hellfire-auto\FireMate\drivers\chromedriver.exe"
         print "Chrome Driver path: " .format(driverPath)
         return webdriver.Chrome(driverPath)
         # return webdriver.Firefox()
