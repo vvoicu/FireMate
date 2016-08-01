@@ -29,4 +29,5 @@ class PoliciesPage(WebdriverBase):
                         policies['date']=policiesItemDateNow.text
 
     def print_policies(self, list):
-        for itemNow
+        # for itemNow
+        pass
