@@ -1,5 +1,7 @@
 import os
 
+propertySeparator = "="
+commentSeparator = "#"
 runConfigFile = "RunOption.txt"
 
 class ConfigUtils(object):
@@ -19,17 +21,15 @@ class ConfigUtils(object):
         fullPath = os.path.join(pathRoot, "configs", configFileName + ".ini")
         print fullPath
 
-        sep = "="
-        comment_char = "#"
 
         props = {}
         with open(fullPath, "rt") as f:
             for line in f:
                 l = line.strip()
-                if l and not l.startswith(comment_char):
-                    key_value = l.split(sep)
+                if l and not l.startswith(commentSeparator):
+                    key_value = l.split(propertySeparator)
                     key = key_value[0].strip()
-                    value = sep.join(key_value[1:]).strip('" \t')
+                    value = propertySeparator.join(key_value[1:]).strip('" \t')
                     props[key] = value
         return props
 
