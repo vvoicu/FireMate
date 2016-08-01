@@ -13,4 +13,5 @@ class NavigationMenuPage(WebdriverBase):
             if itemNow.text == name:
                 itemNow.click()
                 print "Found it {} {}" .format(itemNow.text, name)
+                itemNow.click()
                 break
