@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+/configs/RunOption.txt
+RunOption.txt
+
 # C extensions
 *.so
 

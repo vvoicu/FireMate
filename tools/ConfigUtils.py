@@ -34,7 +34,4 @@ class ConfigUtils(object):
         return props
 
 if __name__ == "__main__":
-    # fineName = DriverUtils().read_run_config()
-    # print fineName
     print ConfigUtils().read_config_file()
-    # print os.getcwd().replace("tools")
