@@ -1,7 +1,7 @@
 import unittest
 
-from pages.policies.LoginPage import LoginPage
-from pages.policies.navigation.NavigationMenuPage import NavigationMenuPage
+from pages.hellfire.LoginPage import LoginPage
+from pages.hellfire.navigation.NavigationMenuPage import NavigationMenuPage
 
 baseURL = "https://www.google.com/ncr"
 searchTerm = "darkside \n"
