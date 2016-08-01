@@ -10,9 +10,10 @@ from selenium import webdriver
 
 
 class WebdriverBase(object):
-    elementWait = 30
+
     driver = DriverUtils().start_driver()
-    #config driver
+    elementWait = 30
+    # config driver
     driver.maximize_window()
     driver.set_page_load_timeout(elementWait)
 
@@ -29,4 +30,3 @@ class WebdriverBase(object):
 
     def close_driver(self):
         self.driver.close()
-        # self.driver.quit()
