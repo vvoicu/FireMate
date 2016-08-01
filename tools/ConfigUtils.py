@@ -6,7 +6,7 @@ class ConfigUtils(object):
     def read_run_config(self):
         # pathRoot = os.getcwd().replace("tools","")
         pathRoot = os.path.dirname(os.path.dirname(__file__))
-        with open(pathRoot + "/configs/" + runConfigFile, "r") as f:
+        with open(os.path.join(pathRoot,"configs", runConfigFile), "r") as f:
             configType = f.readline()
             print "Config Selected: {}" .format(configType)
             return configType
@@ -16,7 +16,7 @@ class ConfigUtils(object):
         # pathRoot = os.getcwd().replace("tools", "")
         pathRoot = os.path.dirname(os.path.dirname(__file__))
         configFileName = self.read_run_config().replace("\n","");
-        fullPath = pathRoot + "/configs/" + configFileName + ".ini"
+        fullPath = os.path.join(pathRoot, "configs", configFileName + ".ini")
         print fullPath
 
         sep = "="
