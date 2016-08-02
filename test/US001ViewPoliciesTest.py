@@ -24,7 +24,9 @@ class US001ViewPoliciesTest(unittest.TestCase):
         LoginPage().perform_login(self.userName, self.userPass)
         NavigationMenuPage().click_on_menu_item(self.menuLabel)
         PoliciesPage().get_policies()
-        PoliciesPage().get_policies_from("Workspace11")
+        # PoliciesPage().get_policies_from("Workspace11")
+        list = PoliciesPage().get_policies_from("Workspace11")
+        PoliciesPage().print_policies(list)
 
 
     def tearDown(self):
