@@ -24,3 +24,6 @@ class US003WorkspaceManagementTest(unittest.TestCase):
         NavigationMenuPage().click_on_menu_item(self.menuLabel)
         PoliciesWorkspaceManagement().get_policies_management_button(workspaceName)
         PoliciesWorkspaceManagement().choose_how_to_manage_your_workspace(manipulationButtonName)
+
+    def tearDown(self):
+        LoginPage().close_driver()
