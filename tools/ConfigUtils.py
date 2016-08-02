@@ -3,10 +3,10 @@ import os
 propertySeparator = "="
 commentSeparator = "#"
 runConfigFile = "RunOption.txt"
+pathRoot = os.path.dirname(os.path.dirname(__file__))
 
 class ConfigUtils(object):
     def read_run_config(self):
-        pathRoot = os.path.dirname(os.path.dirname(__file__))
         with open(os.path.join(pathRoot,"configs", runConfigFile), "r") as f:
             configType = f.readline()
             print "Config Selected: {}" .format(configType)
@@ -14,12 +14,9 @@ class ConfigUtils(object):
         return "dev"
 
     def read_config_file(self):
-        pathRoot = os.path.dirname(os.path.dirname(__file__))
         configFileName = self.read_run_config().replace("\n","");
         fullPath = os.path.join(pathRoot, "configs", configFileName + ".ini")
         print fullPath
-
-
         props = {}
         with open(fullPath, "rt") as f:
             for line in f:
