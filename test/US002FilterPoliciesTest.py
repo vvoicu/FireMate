@@ -26,7 +26,7 @@ class US002FilterPoliciesTest(unittest.TestCase):
 
         FiltersPage().click_sort_descending()
         FiltersPage().click_sort_ascending()
-        FiltersPage().grab_filters_list()
+        print FiltersPage().grab_filters_list()
         FiltersPage().click_filter_policy(self.policyName)
 
     def tearDown(self):
