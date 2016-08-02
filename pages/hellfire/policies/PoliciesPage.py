@@ -1,5 +1,6 @@
 from tools import WebdriverBase
 from tools.WebdriverBase import WebdriverBase
+from tools.FileUtils import FileUtils
 
 policiesContainerLocator = "div.index-tiles"
 
