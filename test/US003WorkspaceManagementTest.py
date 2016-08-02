@@ -2,7 +2,7 @@ import unittest
 
 from pages.hellfire.LoginPage import LoginPage
 from pages.hellfire.navigation.NavigationMenuPage import NavigationMenuPage
-from pages.hellfire.policies.PoliciesWorkspaceManagementPage import PoliciesWorkspaceManagement
+from pages.hellfire.policies.WorkspaceManagementPage import WorkspaceManagementPage
 from tools.WebdriverBase import WebdriverBase
 from tools.DriverUtils import DriverUtils
 
@@ -22,8 +22,8 @@ class US003WorkspaceManagementTest(unittest.TestCase):
         # login actions
         LoginPage().perform_login(self.userName, self.userPass)
         NavigationMenuPage().click_on_menu_item(self.menuLabel)
-        PoliciesWorkspaceManagement().get_policies_management_button(workspaceName)
-        PoliciesWorkspaceManagement().choose_how_to_manage_your_workspace(manipulationButtonName)
+        WorkspaceManagementPage().get_policies_management_button(workspaceName)
+        WorkspaceManagementPage().choose_how_to_manage_your_workspace(manipulationButtonName)
 
     def tearDown(self):
         LoginPage().close_driver()
