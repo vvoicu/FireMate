@@ -26,10 +26,10 @@ class US001ViewPoliciesTest(unittest.TestCase):
         # login actions
         LoginPage().perform_login(self.userName, self.userPass)
         NavigationMenuPage().click_on_menu_item(self.menuLabel)
-        # PoliciesPage().get_policies()
-        # list = PoliciesPage().get_policies_sorted_by_type("Workspace11")
-        # PoliciesPage().print_policies(list)
-        # PoliciesHeaderPage().click_filter_icon()
+        listGrouping = PoliciesPage().get_policies_grouping_name()
+        print listGrouping
+        list = PoliciesPage().get_policies_sorted_by_type("Workspace11")
+        PoliciesPage().print_policies(list)
         PoliciesHeaderPage().click_filter_icon()
         FiltersPage().select_sort_type(self.sortType)
         listName = PoliciesPage().get_policies_sorted_by_name()
