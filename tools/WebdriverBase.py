@@ -25,3 +25,4 @@ class WebdriverBase(object):
 
     def close_driver(self):
         self.driver.close()
+        self.driver.quit()
