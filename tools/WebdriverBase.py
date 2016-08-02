@@ -4,11 +4,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from DriverUtils import DriverUtils
 from selenium import webdriver
 
-## This headless configuration will work only on linux machines
-##
-
-
-
 class WebdriverBase(object):
 
     driver = DriverUtils().start_driver()

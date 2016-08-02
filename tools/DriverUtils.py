@@ -1,13 +1,13 @@
-# from pyvirtualdisplay import Display
+from pyvirtualdisplay import Display
 from selenium import webdriver
 from ConfigUtils import ConfigUtils
 import os
 
 class DriverUtils(object):
     def start_linux_headless(self):
-        # headless config
-        # display = Display(visible=0, size=(800, 600))
-        # display.start()
+        ## This headless configuration will work only on linux machines
+        display = Display(visible=0, size=(800, 600))
+        display.start()
         pass
 
     def start_driver(self):
