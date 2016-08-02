@@ -5,12 +5,13 @@ policiesContainerLocator = "div.index-tiles"
 
 
 class PoliciesPage(WebdriverBase):
-    def get_policies(self):
+    def get_policies_grouping_name(self):
+        groupingList = []
         policiesContainer = WebdriverBase().locate_element_by_css_selector(policiesContainerLocator)
         policiesList = policiesContainer.find_elements_by_css_selector("div.index-tiles__section header")
-
         for itemNow in policiesList:
-            print itemNow.text
+            groupingList.append(itemNow.text)
+        return groupingList
 
     def get_policies_sorted_by_type(self, policiesName):
         list = []
