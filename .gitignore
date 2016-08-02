@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 /configs/RunOption.txt
+configs/RunOption.txt
 RunOption.txt
 
 # C extensions
