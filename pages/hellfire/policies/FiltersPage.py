@@ -9,10 +9,11 @@ policyTypeListLocator = "h3 + div[class*='column'] label"
 
 class FiltersPage(WebdriverBase):
     def grab_filters_list(self):
+        returnList = []
         policyTypes = WebdriverBase().locate_elements_by_css_selector(policyTypeListLocator)
         for itemNow in policyTypes:
-            print itemNow.text
-        return policyTypes
+            returnList.append(itemNow.text)
+        return returnList
 
     def click_filter_policy(self, policyName):
         policyTypes = WebdriverBase().locate_elements_by_css_selector(policyTypeListLocator)

@@ -4,20 +4,22 @@ from pages.hellfire.LoginPage import LoginPage
 from pages.hellfire.navigation.NavigationMenuPage import NavigationMenuPage
 from pages.hellfire.policies.PoliciesHeaderPage import PoliciesHeaderPage
 from pages.hellfire.policies.FiltersPage import FiltersPage
+from tools.FileUtils import FileUtils
 
-baseURL = "http://172.22.140.89:8014/login"
+
 
 class US002FilterPoliciesTest(unittest.TestCase):
     def setUp(self):
-        #login details
-        self.userName = "admin"
-        self.userPass = "admin"
-        self.menuLabel = "Policies"
-        self.sortType = "Name"
-        self.policyName = "Workspace2"
+        #test data
+        self.baseURL = FileUtils().read_property("US002.ini", "baseURL")
+        self.userName = FileUtils().read_property("US002.ini", "userName")
+        self.userPass = FileUtils().read_property("US002.ini", "userPass")
+        self.menuLabel = FileUtils().read_property("US002.ini", "menuLabel")
+        self.sortType = FileUtils().read_property("US002.ini", "sortType")
+        self.policyName = FileUtils().read_property("US002.ini", "policyName")
 
     def test_search(self):
-        LoginPage().navigate_to(baseURL)
+        LoginPage().navigate_to(self.baseURL)
         # login actions
         LoginPage().perform_login(self.userName, self.userPass)
         NavigationMenuPage().click_on_menu_item(self.menuLabel)
@@ -26,7 +28,7 @@ class US002FilterPoliciesTest(unittest.TestCase):
 
         FiltersPage().click_sort_descending()
         FiltersPage().click_sort_ascending()
-        FiltersPage().grab_filters_list()
+        print FiltersPage().grab_filters_list()
         FiltersPage().click_filter_policy(self.policyName)
 
     def tearDown(self):
