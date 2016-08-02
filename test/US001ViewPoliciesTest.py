@@ -32,7 +32,7 @@ class US001ViewPoliciesTest(unittest.TestCase):
         listAplicationGrouping = PoliciesPage().get_policies_grouping_name()
         print listAplicationGrouping
 
-        # list = PoliciesPage().get_policies_sorted_by_type("Workspace11")
+        listPoliciesGrouping = PoliciesPage().get_policies_sorted_by_type("Workspace11")
         # PoliciesPage().print_policies(list)
         # PoliciesHeaderPage().click_filter_icon()
         # FiltersPage().select_sort_type(self.sortType)
@@ -40,9 +40,13 @@ class US001ViewPoliciesTest(unittest.TestCase):
         # PoliciesPage().print_policies(listName)
 
         fileGrouping = FileUtils().read_properties_as_list("policies.ini", "grouping")
+        fileGroupingName = FileUtils().read_properties_as_list("policies.ini", "Workspace11")
         print fileGrouping
+        print fileGroupingName
+        print listPoliciesGrouping
 
 
+        # SoftAssert().verfy_equals_true("not", listPoliciesGrouping, fileGroupingName)
         SoftAssert().verfy_equals_true("not", listAplicationGrouping, fileGrouping)
         print SoftAssert().failures_size()
         print SoftAssert().failures_list()
