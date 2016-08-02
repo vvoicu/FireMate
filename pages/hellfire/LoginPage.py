@@ -1,5 +1,7 @@
 from tools.WebdriverBase import WebdriverBase
 
+
+
 usernameInputLocator = "#username"
 userpassInputLocator = "#password"
 loginButtonLocator = "#submit"
