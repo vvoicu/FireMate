@@ -2,7 +2,7 @@ import unittest
 
 from pages.hellfire.LoginPage import LoginPage
 from pages.hellfire.navigation.NavigationMenuPage import NavigationMenuPage
-from pages.hellfire.policies.PoliciesWorkspaceManagement import PoliciesWorkspaceManagement
+from pages.hellfire.policies.PoliciesWorkspaceManagementPage import PoliciesWorkspaceManagement
 from tools.WebdriverBase import WebdriverBase
 from tools.DriverUtils import DriverUtils
 
