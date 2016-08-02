@@ -5,7 +5,7 @@ import os
 
 class DriverUtils(object):
     def start_linux_headless(self):
-        # headless config
+        ## This headless configuration will work only on linux machines
         display = Display(visible=0, size=(800, 600))
         display.start()
         pass
