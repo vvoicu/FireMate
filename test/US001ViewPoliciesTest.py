@@ -44,10 +44,10 @@ class US001ViewPoliciesTest(unittest.TestCase):
 
 
         SoftAssert().verfy_equals_true("not", listAplicationGrouping, fileGrouping)
-        print SoftAssert().return_failures_size()
-        print SoftAssert().return_failures_list()
+        print SoftAssert().failures_size()
+        print SoftAssert().failures_list()
 
-        self.assertEqual(len(SoftAssert().return_failures_list()), 0, str(SoftAssert().return_failures_list()))
+        self.assertEqual(SoftAssert().failures_size(), 0, str(SoftAssert().failures_list()))
 
 
     def tearDown(self):

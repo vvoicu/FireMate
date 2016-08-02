@@ -38,7 +38,7 @@ class US002FilterPoliciesTest(unittest.TestCase):
         SoftAssert().verfy_equals_true("Boxes did not match ", "aaaa", "dodo")
         # print SoftAssert().return_failures_list()
 
-        self.assertEqual(len(SoftAssert().return_failures_list()), 0, str(SoftAssert().return_failures_list()))
+        self.assertEqual(SoftAssert().failures_size(), 0, str(SoftAssert().failures_list()))
 
     def tearDown(self):
         LoginPage().close_driver()
