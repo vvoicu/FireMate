@@ -2,9 +2,9 @@
 Implemented with Python 2.7.6
 
 #Project prerequisites
-pip install selenium
-pip install pyvirtualdisplay
-pip install py4j
+    pip install selenium
+    pip install pyvirtualdisplay
+    pip install py4j
 
 #Run Configuration
 Depending on the desired run options you will need to set the configs/RunOption.txt

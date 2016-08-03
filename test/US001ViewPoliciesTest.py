@@ -8,8 +8,10 @@ from pages.hellfire.policies.PoliciesHeaderPage import PoliciesHeaderPage
 from pages.hellfire.policies.FiltersPage import FiltersPage
 from tools.SoftAssert import SoftAssert
 from tools.FileUtils import FileUtils
+import logging
 
 
+logging.basicConfig(filename = "US001ViewPoliciesTest.log", level = logging.INFO)
 class US001ViewPoliciesTest(unittest.TestCase):
     def setUp(self):
         # test data
