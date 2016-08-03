@@ -1,10 +1,15 @@
 from tools import WebdriverBase
 from tools.WebdriverBase import WebdriverBase
 from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException, NoSuchWindowException
+from tools.FileUtils import FileUtils
+from tools.SoftAssert import SoftAssert
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import unittest
 
 policiesContainerLocator = "div.index-tiles"
 policiesButtonsContainer = "button+nav[role='menu']"
-
 
 class WorkspaceManagementPage(WebdriverBase):
     def get_policies_management_button(self, workspacename):
@@ -18,9 +23,18 @@ class WorkspaceManagementPage(WebdriverBase):
                 policiesRightMenuButton.click()
                 break
 
+    def get_buttons_grouping_name(self):
+        allButtonsList = []
+        buttonsContainer = WebdriverBase().locate_element_by_css_selector(policiesButtonsContainer)
+        if buttonsContainer.is_displayed():
+            buttonsList = buttonsContainer.find_elements_by_css_selector("a")
+            for itemNow in buttonsList:
+                allButtonsList.append(itemNow.text)
+            return allButtonsList
+
     def choose_how_to_manage_your_workspace(self, manipulationButton):
+        buttonsContainer = WebdriverBase().locate_element_by_css_selector(policiesButtonsContainer)
         try:
-            buttonsContainer = WebdriverBase().locate_element_by_css_selector(policiesButtonsContainer)
             if buttonsContainer.is_displayed():
                 buttonsList = buttonsContainer.find_elements_by_css_selector("a")
                 for buttonNow in buttonsList:
@@ -29,3 +43,17 @@ class WorkspaceManagementPage(WebdriverBase):
                         break
         except StaleElementReferenceException as e:
             print (e)
+
+    # def verify_the_buttons_list(self):
+    #     buttonsContainer = WebdriverBase().locate_element_by_css_selector(policiesButtonsContainer)
+    #     buttonsList = buttonsContainer.find_elements_by_css_selector("a")
+    #     buttonsListToCompare = FileUtils().read_properties_as_list("US003.ini", "managementButtons")
+    #     SoftAssert().verfy_equals_true("not", buttonsList, buttonsListToCompare)
+    #     print SoftAssert().failures_size()
+    #     print SoftAssert().failures_list()
+    #     print buttonsList
+    #     print buttonsListToCompare
+        # unittest.assertListEqual(buttonsList, buttonsListToCompare, msg=None)
+
+
+
