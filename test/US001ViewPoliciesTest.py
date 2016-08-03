@@ -2,7 +2,6 @@ import unittest
 
 from pages.hellfire.LoginPage import LoginPage
 from pages.hellfire.navigation.NavigationMenuPage import NavigationMenuPage
-from pages.hellfire.policies import PoliciesPage
 from pages.hellfire.policies.PoliciesPage import PoliciesPage
 from pages.hellfire.policies.PoliciesHeaderPage import PoliciesHeaderPage
 from pages.hellfire.policies.FiltersPage import FiltersPage
@@ -23,6 +22,12 @@ class US001ViewPoliciesTest(unittest.TestCase):
         self.allPoliciesGroupingNameList = "allPoliciesGroupingNameList"
         self.policiesByGroupList = "policiesByGroupList"
         self.allPoliciesList = "allPoliciesList"
+        self.listFilePoliciesGrouping = FileUtils().read_properties_as_list(self.policiesFileName,
+                                                                            self.allPoliciesGroupingNameList)
+        self.listFilePoliciesBySpecificGrouping = FileUtils().read_properties_as_dictionary(self.policiesFileName,
+                                                                                            self.policiesByGroupList)
+        self.listFileAllPolicies = FileUtils().read_properties_as_dictionary(self.policiesFileName,
+                                                                             self.allPoliciesList)
 
     def test_search(self):
         LoginPage().navigate_to(self.baseURL)
@@ -34,26 +39,20 @@ class US001ViewPoliciesTest(unittest.TestCase):
         listAplicationPoliciesBySpecificGrouping = PoliciesPage().get_policies_from_specific_policies_group(
             self.policiesGroupName)
 
-        listFilePoliciesGrouping = FileUtils().read_properties_as_list(self.policiesFileName,
-                                                                       self.allPoliciesGroupingNameList)
-        listFilePoliciesBySpecificGrouping = FileUtils().read_properties_as_dictionary(self.policiesFileName,
-                                                                                       self.policiesByGroupList)
-        listFileAllPolicies = FileUtils().read_properties_as_dictionary(self.policiesFileName, self.allPoliciesList)
-
         # verify that aplication contains all the policies grouping specified in the file
         SoftAssert().verfy_equals_true("List of policies grouping name doesn't matched ",
-                                       listAplicationPoliciesGrouping, listFilePoliciesGrouping)
+                                       listAplicationPoliciesGrouping, self.listFilePoliciesGrouping)
         # verify that aplication contains all the policies from a specified groupin policies given from file
         SoftAssert().verfy_equals_true("List of policies from specific group doesn't matched  ",
                                        listAplicationPoliciesBySpecificGrouping,
-                                       listFilePoliciesBySpecificGrouping)
+                                       self.listFilePoliciesBySpecificGrouping)
 
         PoliciesHeaderPage().click_filter_icon()
         FiltersPage().select_sort_type(self.sortType)
         listAplicationAllPolicies = PoliciesPage().get_policies_sorted_by_name()
         # verify that aplication contains all the policies when sorting by name is selected
         SoftAssert().verfy_equals_true("List of all policies doesn't matched", listAplicationAllPolicies,
-                                       listFileAllPolicies)
+                                       self.listFileAllPolicies)
 
         print SoftAssert().failures_size()
         print SoftAssert().failures_list()
