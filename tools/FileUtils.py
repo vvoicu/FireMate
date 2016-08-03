@@ -25,7 +25,7 @@ class FileUtils(object):
 
     def read_properties_as_dictionary(self, fileName, propertyName):
         dictionaryList = ast.literal_eval(self.read_property(fileName, propertyName))
-        return dictionaryList
+        return list(dictionaryList)
 
 
 if __name__ == "__main__":
@@ -36,3 +36,4 @@ if __name__ == "__main__":
 
     dictionaryList = FileUtils().read_properties_as_dictionary("policies.ini", "Workspace11")
     print dictionaryList[1]["date"]
+    print dictionaryList
