@@ -9,8 +9,8 @@ from pages.hellfire.policies.FiltersPage import FiltersPage
 from tools.SoftAssert import SoftAssert
 from tools.FileUtils import FileUtils
 
-baseURL = "https://www.google.com/ncr"
-searchTerm = "darkside \n"
+# baseURL = "https://www.google.com/ncr"
+# searchTerm = "darkside \n"
 
 
 class US001ViewPoliciesTest(unittest.TestCase):
@@ -30,24 +30,27 @@ class US001ViewPoliciesTest(unittest.TestCase):
         NavigationMenuPage().click_on_menu_item(self.menuLabel)
 
         listAplicationGrouping = PoliciesPage().get_policies_grouping_name()
-        print listAplicationGrouping
-
-        # list = PoliciesPage().get_policies_sorted_by_type("Workspace11")
-        # PoliciesPage().print_policies(list)
-        # PoliciesHeaderPage().click_filter_icon()
-        # FiltersPage().select_sort_type(self.sortType)
-        # listName = PoliciesPage().get_policies_sorted_by_name()
-        # PoliciesPage().print_policies(listName)
+        listPoliciesGrouping = PoliciesPage().get_policies_sorted_by_type("Workspace11")
 
         fileGrouping = FileUtils().read_properties_as_list("policies.ini", "grouping")
-        print fileGrouping
+        fileGroupingName = FileUtils().read_properties_as_dictionary("policies.ini", "Workspace11")
+        fileAllPolicies = FileUtils().read_properties_as_dictionary("policies.ini", "allPolicies")
 
-
+        # verify that aplication contains all the policies grouping specified in the file
         SoftAssert().verfy_equals_true("not", listAplicationGrouping, fileGrouping)
+        # verify that aplication contains all the policies from a specified groupin policies given from file
+        SoftAssert().verfy_equals_true("not", listPoliciesGrouping, fileGroupingName)
+
+        PoliciesHeaderPage().click_filter_icon()
+        FiltersPage().select_sort_type(self.sortType)
+        listName = PoliciesPage().get_policies_sorted_by_name()
+        #verify that aplication contains all the policies when sorting by name is selected
+        SoftAssert().verfy_equals_true("not", listName, fileAllPolicies)
+
         print SoftAssert().failures_size()
         print SoftAssert().failures_list()
-
         self.assertEqual(SoftAssert().failures_size(), 0, str(SoftAssert().failures_list()))
+
 
 
     def tearDown(self):
