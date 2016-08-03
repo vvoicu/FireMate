@@ -9,49 +9,55 @@ from pages.hellfire.policies.FiltersPage import FiltersPage
 from tools.SoftAssert import SoftAssert
 from tools.FileUtils import FileUtils
 
-# baseURL = "https://www.google.com/ncr"
-# searchTerm = "darkside \n"
-
 
 class US001ViewPoliciesTest(unittest.TestCase):
     def setUp(self):
-        # login details
-        self.userName = "admin"
-        self.userPass = "admin"
-        # menu selection
-        # self.menuLabel = "Images"
-        self.menuLabel = "Policies"
-        self.sortType = "Name"
+        # test data
+        self.policiesFileName = "US001.ini"
+        self.baseURL = FileUtils().read_property("US001.ini", "baseURL")
+        self.userName = FileUtils().read_property("US001.ini", "userName")
+        self.userPass = FileUtils().read_property("US001.ini", "userPass")
+        self.menuLabel = FileUtils().read_property("US001.ini", "menuLabel")
+        self.sortType = FileUtils().read_property("US001.ini", "sortType")
+        self.policiesGroupName = FileUtils().read_property("US001.ini", "policiesGroupName")
+        self.allPoliciesGroupingNameList = "allPoliciesGroupingNameList"
+        self.policiesByGroupList = "policiesByGroupList"
+        self.allPoliciesList = "allPoliciesList"
 
     def test_search(self):
-        LoginPage().navigate_to("http://172.22.140.89:8014/login")
+        LoginPage().navigate_to(self.baseURL)
         # login actions
         LoginPage().perform_login(self.userName, self.userPass)
         NavigationMenuPage().click_on_menu_item(self.menuLabel)
 
-        listAplicationGrouping = PoliciesPage().get_policies_grouping_name()
-        listPoliciesGrouping = PoliciesPage().get_policies_sorted_by_type("Workspace11")
+        listAplicationPoliciesGrouping = PoliciesPage().get_policies_grouping_name()
+        listAplicationPoliciesBySpecificGrouping = PoliciesPage().get_policies_from_specific_policies_group(
+            self.policiesGroupName)
 
-        fileGrouping = FileUtils().read_properties_as_list("policies.ini", "grouping")
-        fileGroupingName = FileUtils().read_properties_as_dictionary("policies.ini", "Workspace11")
-        fileAllPolicies = FileUtils().read_properties_as_dictionary("policies.ini", "allPolicies")
+        listFilePoliciesGrouping = FileUtils().read_properties_as_list(self.policiesFileName,
+                                                                       self.allPoliciesGroupingNameList)
+        listFilePoliciesBySpecificGrouping = FileUtils().read_properties_as_dictionary(self.policiesFileName,
+                                                                                       self.policiesByGroupList)
+        listFileAllPolicies = FileUtils().read_properties_as_dictionary(self.policiesFileName, self.allPoliciesList)
 
         # verify that aplication contains all the policies grouping specified in the file
-        SoftAssert().verfy_equals_true("not", listAplicationGrouping, fileGrouping)
+        SoftAssert().verfy_equals_true("List of policies grouping name doesn't matched ",
+                                       listAplicationPoliciesGrouping, listFilePoliciesGrouping)
         # verify that aplication contains all the policies from a specified groupin policies given from file
-        SoftAssert().verfy_equals_true("not", listPoliciesGrouping, fileGroupingName)
+        SoftAssert().verfy_equals_true("List of policies from specific group doesn't matched  ",
+                                       listAplicationPoliciesBySpecificGrouping,
+                                       listFilePoliciesBySpecificGrouping)
 
         PoliciesHeaderPage().click_filter_icon()
         FiltersPage().select_sort_type(self.sortType)
-        listName = PoliciesPage().get_policies_sorted_by_name()
-        #verify that aplication contains all the policies when sorting by name is selected
-        SoftAssert().verfy_equals_true("not", listName, fileAllPolicies)
+        listAplicationAllPolicies = PoliciesPage().get_policies_sorted_by_name()
+        # verify that aplication contains all the policies when sorting by name is selected
+        SoftAssert().verfy_equals_true("List of all policies doesn't matched", listAplicationAllPolicies,
+                                       listFileAllPolicies)
 
         print SoftAssert().failures_size()
         print SoftAssert().failures_list()
         self.assertEqual(SoftAssert().failures_size(), 0, str(SoftAssert().failures_list()))
-
-
 
     def tearDown(self):
         LoginPage().close_driver()
